@@ -7,7 +7,7 @@ leaderRouter.use(bodyParser.json());
 
 leaderRouter.route('/')
 .get((req,res,next) => {
-    .find({})
+    leaders.find({})
     .then((leaders) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -44,7 +44,7 @@ leaderRouter.route('/')
 
 leaderRouter.route('/leaders')
 .get((req,res,next) => {
-    .find({})
+    leaders.find({})
     .then((leaders) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -119,7 +119,7 @@ leaderRouter.route('/leaders/:leadId')
             }, (err) => next(err));
         }
         else {
-            err = new Error('leader'' + req.params.leadId + ' not found');
+            err = new Error('leader' + req.params.leadId + ' not found');
             err.status = 404;
             return next(err);            
         }
@@ -129,4 +129,4 @@ leaderRouter.route('/leaders/:leadId')
 
 
 
-module.exports = leadRouter;
+module.exports = leaderRouter;

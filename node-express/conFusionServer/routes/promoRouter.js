@@ -1,13 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const Promotions = require('../models/promotions');
+
 const promoRouter = express.Router();
 
 promoRouter.use(bodyParser.json());
 
 promoRouter.route('/')
 .get((req,res,next) => {
-    .find({})
+    Promotions.find({})
     .then((promotions) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -44,7 +46,7 @@ promoRouter.route('/')
 
 promoRouter.route('/promotions')
 .get((req,res,next) => {
-    .find({})
+    Promotions.find({})
     .then((promotions) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -119,7 +121,7 @@ promoRouter.route('/promotions/:promoId')
             }, (err) => next(err));
         }
         else {
-            err = new Error('promo'' + req.params.promoId + ' not found');
+            err = new Error('promo' + req.params.promoId + ' not found');
             err.status = 404;
             return next(err);            
         }
