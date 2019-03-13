@@ -12,7 +12,18 @@ router.use(bodyParser.json());
 router.get('/',function (req,res,next){
   res.send('respond with a resource');
 });
-
+router.route('/users')
+.get(authenticate.verifyUser, function(req,res,next) {
+  var err =authenticate.verifyAdmin(req.user.admin);
+  if(err) {return next(err);}
+  User.find({})
+  .then((userList) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type','application/json');
+    res.json(userList);
+  }, (err) => next(err))
+  .catch((err) => next(err));
+});
 
 router.post('/signup', (req, res, next) => {
   User.register(new User({username: req.body.username}), 
@@ -37,7 +48,7 @@ router.post('/signup', (req, res, next) => {
         passport.authenticate('local')(req, res, () => {
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
-          res.json({success: true, status: 'Registration Successful!'});
+          res.json({success: true, status: 'Registration Succes!'});
         });
       });
     }
