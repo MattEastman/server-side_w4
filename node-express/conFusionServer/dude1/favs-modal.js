@@ -1,0 +1,1 @@
+https://s3.amazonaws.com/coursera-uploads/peer-review/71a519426591bde2e9749259b75f0463/favorites.model.js
